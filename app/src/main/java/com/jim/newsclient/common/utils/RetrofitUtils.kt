@@ -2,6 +2,7 @@ package com.jim.newsclient.common.utils
 
 import android.util.Log
 import com.jim.newsclient.BuildConfig
+import com.jim.newsclient.base.BaseCommand
 import com.jim.newsclient.common.net.MapFiled
 import com.jim.newsclient.common.net.NetApi
 import com.jim.newsclient.config.Constant
@@ -52,16 +53,52 @@ object RetrofitUtils {
         return retrofit!!
     }
 
-    fun createMaps(list: List<MapFiled>):Map<String,String>{
-        var map=HashMap<String,String>()
-        val size=list.size
+    fun createMaps(list: List<MapFiled>): Map<String, String> {
+        var map = HashMap<String, String>()
+        val size = list.size
         (0 until size)
                 .map { list[it] }
-                .forEach { map.put(it.getKey(),it.getValue()) }
+                .forEach { map.put(it.getKey(), it.getValue()) }
         return map
     }
 
-    fun fetchNews(list: List<MapFiled>):Observable<BaseBean<NewsBean>> {
-        return getRetrofit().create(NetApi::class.java).fetchNews(createMaps(list))
+    fun createListFileds(command: BaseCommand): List<MapFiled> {
+        var list = ArrayList<MapFiled>()
+        val fields = command.javaClass.getFields()
+        for (filed in fields) {
+            val isAccess = filed.isAccessible
+            filed.isAccessible = true
+            list.add(MapFiled(filed.name, filed.get(filed.name).toString()))
+            filed.isAccessible = isAccess
+        }
+        return list
+    }
+
+    fun fetchWorldNews(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchWorldNews(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchHuaBian(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchHuaBian(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchQiwen(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchQiwen(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchHealth(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchHealth(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchTiYu(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchTiYu(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchKeji(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchKeji(createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchTravel(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+        return getRetrofit().create(NetApi::class.java).fetchTravel(createMaps(createListFileds(cmd)))
     }
 }

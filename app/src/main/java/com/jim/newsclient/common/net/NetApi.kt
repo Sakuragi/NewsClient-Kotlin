@@ -11,7 +11,7 @@ import rx.Observable
  */
 interface NetApi {
     @GET("world/")
-    fun fetchNews(@QueryMap maps: Map<String, String>): Observable<BaseBean<NewsBean>>
+    fun fetchWorldNews(@QueryMap maps: Map<String, String>): Observable<BaseBean<NewsBean>>
 
     @GET("huabian/")
     fun fetchHuaBian(@QueryMap maps: Map<String, String>): Observable<BaseBean<NewsBean>>

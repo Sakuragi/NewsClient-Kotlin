@@ -33,10 +33,12 @@ dependencies {
     compile 'com.android.support:design:25.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
+
 repositories {
     mavenCentral()
 }
