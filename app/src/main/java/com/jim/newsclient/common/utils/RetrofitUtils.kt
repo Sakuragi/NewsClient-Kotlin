@@ -6,8 +6,8 @@ import com.jim.newsclient.base.BaseCommand
 import com.jim.newsclient.common.net.MapFiled
 import com.jim.newsclient.common.net.NetApi
 import com.jim.newsclient.config.Constant
-import com.jim.newsclient.module.news.BaseBean
-import com.jim.newsclient.module.news.NewsBean
+import com.jim.newsclient.module.news.model.BaseBean
+import com.jim.newsclient.module.news.model.NewsBean
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory

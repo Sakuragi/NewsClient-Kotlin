@@ -1,7 +1,7 @@
 package com.jim.newsclient.common.net
 
-import com.jim.newsclient.module.news.BaseBean
-import com.jim.newsclient.module.news.NewsBean
+import com.jim.newsclient.module.news.model.BaseBean
+import com.jim.newsclient.module.news.model.NewsBean
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 import rx.Observable

@@ -1,4 +1,4 @@
-package com.jim.newsclient.module.news
+package com.jim.newsclient.module.news.model
 
 /**
  * Created by Jim on 2017/11/27.
