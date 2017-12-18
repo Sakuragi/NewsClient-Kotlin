@@ -12,4 +12,5 @@ object Constant {
     val TYPE_TIYU=4
     val TYPE_KEJI=5
     val TYPE_TRAVEL=6
+    val URLS= arrayOf("world/","huabian/","qiwen/","health/","tiyu/","keji/","travel/")
 }

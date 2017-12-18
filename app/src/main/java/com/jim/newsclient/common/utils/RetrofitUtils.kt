@@ -8,12 +8,13 @@ import com.jim.newsclient.common.net.NetApi
 import com.jim.newsclient.config.Constant
 import com.jim.newsclient.module.news.model.BaseBean
 import com.jim.newsclient.module.news.model.NewsBean
+import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.Observable
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.experimental.EmptyCoroutineContext.plus
 
 /**
  * Created by Jim on 2017/11/23.
@@ -45,7 +46,7 @@ object RetrofitUtils {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                     .baseUrl(Constant.baseUrl)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttp)
                     .build()
@@ -64,41 +65,45 @@ object RetrofitUtils {
 
     fun createListFileds(command: BaseCommand): List<MapFiled> {
         var list = ArrayList<MapFiled>()
-        val fields = command.javaClass.getFields()
+        val fields = command.javaClass.declaredFields
         for (filed in fields) {
             val isAccess = filed.isAccessible
             filed.isAccessible = true
-            list.add(MapFiled(filed.name, filed.get(filed.name).toString()))
+            list.add(MapFiled(filed.name, filed.get(command).toString()))
             filed.isAccessible = isAccess
         }
         return list
     }
 
-    fun fetchWorldNews(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchNews(path:String,cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
+        return getRetrofit().create(NetApi::class.java).fetchNews(path,createMaps(createListFileds(cmd)))
+    }
+
+    fun fetchWorldNews(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchWorldNews(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchHuaBian(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchHuaBian(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchHuaBian(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchQiwen(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchQiwen(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchQiwen(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchHealth(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchHealth(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchHealth(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchTiYu(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchTiYu(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchTiYu(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchKeji(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchKeji(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchKeji(createMaps(createListFileds(cmd)))
     }
 
-    fun fetchTravel(cmd: BaseCommand): Observable<BaseBean<NewsBean>> {
+    fun fetchTravel(cmd: BaseCommand): Observable<BaseBean<List<NewsBean>>> {
         return getRetrofit().create(NetApi::class.java).fetchTravel(createMaps(createListFileds(cmd)))
     }
 }
