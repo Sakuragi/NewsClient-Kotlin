@@ -45,18 +45,16 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     }
 
     override fun lazyLoad() {
-        if (!isPrepared||!isVisbileToUser){
+        if (!isPrepared or !isVisbileToUser){
             return
         }
+        Log.d("tag","lazyload")
         initDatas()
         initViews()
         onRefresh()
         isPrepared=false
     }
 
-    fun fetchDatas(){
-        mPresenter?.fetchNews(newsType!!,page!!,num)
-    }
 
     fun initViews(){
         news_rcv.layoutManager=LinearLayoutManager(activity)
@@ -76,6 +74,9 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
         Log.d("tag","get resp: "+resp.toString())
         if (resp.code==200){
             Log.d("tag","news fetched")
+            if (page==0){
+                adapter?.clearData()
+            }
             adapter?.addDatas(resp.newslist)
         }
     }

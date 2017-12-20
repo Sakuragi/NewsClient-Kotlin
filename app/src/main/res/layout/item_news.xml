@@ -2,40 +2,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@android:color/white"
-                android:orientation="vertical">
+                android:layout_height="80dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:id="@+id/title_layout">
 
-    <ImageView
-        android:id="@+id/news_head"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerVertical="true"
-        android:background="@drawable/ic_img_defult"/>
+<ImageView
+    android:id="@+id/news_head_img"
+    android:layout_width="86dp"
+    android:layout_height="60dp"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:scaleType="centerCrop"
+    android:layout_marginTop="3dp"
+    android:background="@drawable/ic_img_defult"
+    android:visibility="visible"/>
 
-    <TextView
-        android:id="@+id/news_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/news_head"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        tools:text="中国首富又拯救中国足球，恒大再砸2.1个亿造一个中国足球的未来"/>
+<TextView
+    android:id="@+id/news_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/news_head_img"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="10dp"
+    android:maxLines="2"
+    android:textSize="16sp"/>
 
-    <TextView
-        android:id="@+id/news_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/news_head"
-        android:layout_below="@+id/news_title"
-        android:gravity="right"
-        android:paddingRight="5dp"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:textColor="@android:color/darker_gray"
-        tools:text="2017-12-04 18:44"/>
-
+<TextView
+    android:id="@+id/news_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/news_head_img"
+    android:layout_alignParentRight="true"
+    tools:text="ss"
+    android:textSize="12sp"/>
 
 </RelativeLayout>

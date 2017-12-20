@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NewsClient-Kotlin</string>
+
+    <color name="tab_bg">#f9f9f9</color>
+    <color name="tab_text_bg">#bababa</color>
+    <color name="line_bg">#f0f0f0</color>
+    <color name="transparent">#00000000 </color>
+    <color name="white">#FFFFFF</color>
+    <color name="topbar_bg">#12AF4D</color>
 </resources>

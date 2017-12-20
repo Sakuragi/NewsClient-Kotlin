@@ -18,13 +18,18 @@ open class BaseLazyFragment:Fragment(){
         return view
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lazyLoad()
+    }
+
     open fun getContentId():Int{
         return 0
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser){
+        if (userVisibleHint){
             isVisbileToUser=true
             onVisible()
         }else{
@@ -40,5 +45,4 @@ open class BaseLazyFragment:Fragment(){
     open fun lazyLoad(){}
 
     open fun onInvisible(){}
-
 }

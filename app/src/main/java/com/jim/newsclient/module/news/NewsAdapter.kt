@@ -21,6 +21,10 @@ class NewsAdapter(var datas:ArrayList<NewsBean>,var context:Context):RecyclerVie
         notifyDataSetChanged();
     }
 
+    fun clearData(){
+        datas?.clear()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
         var v=LayoutInflater.from(context).inflate(R.layout.item_news,parent,false)
         return BaseViewHolder(v,context)
@@ -29,7 +33,7 @@ class NewsAdapter(var datas:ArrayList<NewsBean>,var context:Context):RecyclerVie
     override fun onBindViewHolder(holder: BaseViewHolder?, position: Int) {
         holder?.setText(R.id.news_title,datas[position].title)
         holder?.setText(R.id.news_time,datas[position].ctime)
-        holder?.setImageWithUrl(R.id.news_head,datas[position].picUrl)
+        holder?.setImageWithUrl(R.id.news_head_img,datas[position].picUrl)
     }
 
     override fun getItemCount(): Int {
