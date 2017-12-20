@@ -42,9 +42,11 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isPrepared=true
+        lazyLoad()
     }
 
     override fun lazyLoad() {
+        Log.d("tag","ispre: "+isPrepared+" isvis: "+isVisbileToUser)
         if (!isPrepared or !isVisbileToUser){
             return
         }

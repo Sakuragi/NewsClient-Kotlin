@@ -18,10 +18,6 @@ open class BaseLazyFragment:Fragment(){
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lazyLoad()
-    }
 
     open fun getContentId():Int{
         return 0
