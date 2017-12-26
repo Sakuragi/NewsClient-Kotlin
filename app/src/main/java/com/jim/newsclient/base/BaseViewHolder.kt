@@ -25,7 +25,7 @@ class BaseViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
     private fun <T> getView(viewId: Int): T {
         var v = mViews?.get(viewId)
         if (v == null) {
-            var v = itemView.findViewById(viewId)
+            v = itemView.findViewById(viewId)
             mViews?.put(viewId, v)
         }
         Log.d("BaseViewHolder","run next")

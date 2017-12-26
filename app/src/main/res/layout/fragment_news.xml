@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@android:color/white"
               android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -12,8 +13,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/news_rcv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/line_bg"/>
+            android:layout_height="match_parent"/>
 
 
     </android.support.v4.widget.SwipeRefreshLayout>

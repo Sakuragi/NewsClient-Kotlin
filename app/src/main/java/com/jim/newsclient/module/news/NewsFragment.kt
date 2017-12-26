@@ -16,9 +16,9 @@ import kotlinx.android.synthetic.main.fragment_news.*
  */
 class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshListener{
 
-    var newsType:Int?=null
+    var newsType:Int=0
     var mPresenter:NewsPresenter? = null
-    var page:Int?=null
+    var page:Int=0
     var num:Int=10
     var adapter:NewsAdapter?=null
     var datas=ArrayList<NewsBean>()
@@ -77,6 +77,7 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
         if (resp.code==200){
             Log.d("tag","news fetched")
             if (page==0){
+                Log.d("tag","clear data")
                 adapter?.clearData()
             }
             adapter?.addDatas(resp.newslist)

@@ -3,8 +3,10 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:paddingRight="8dp"
+                android:layout_marginBottom="0.5dp"
                 android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:background="@android:color/white"
                 android:id="@+id/title_layout">
 
 <ImageView
@@ -36,5 +38,11 @@
     android:layout_alignParentRight="true"
     tools:text="ss"
     android:textSize="12sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/line_bg"/>
 
 </RelativeLayout>
