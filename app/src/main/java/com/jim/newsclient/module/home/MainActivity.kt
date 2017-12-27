@@ -32,7 +32,7 @@ class MainActivity : BaseActivity(),MainActivityView {
     fun initView() {
         adapter= HomeVpAdapter(supportFragmentManager,fragments!!)
         vp.adapter=adapter
-        vp.offscreenPageLimit=2
+        vp.offscreenPageLimit=5
         tablayout.setupWithViewPager(vp)
     }
 

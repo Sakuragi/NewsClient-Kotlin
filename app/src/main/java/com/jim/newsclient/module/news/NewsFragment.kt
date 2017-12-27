@@ -4,12 +4,22 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import com.jim.newsclient.R
 import com.jim.newsclient.base.BaseLazyFragment
 import com.jim.newsclient.module.news.model.BaseBean
 import com.jim.newsclient.module.news.model.NewsBean
 import kotlinx.android.synthetic.main.fragment_news.*
+import android.animation.AnimatorListenerAdapter
+import android.support.v4.view.animation.FastOutLinearInInterpolator
+import android.support.v4.view.ViewCompat.animate
+import android.R.attr.scaleX
+import android.R.attr.scaleY
+import android.support.v4.view.ViewCompat.canScrollVertically
+import android.support.v7.widget.RecyclerView
+
+
 
 /**
  * Created by Jim on 2017/11/21.
@@ -22,6 +32,7 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     var num:Int=10
     var adapter:NewsAdapter?=null
     var datas=ArrayList<NewsBean>()
+    var isRefresh:Boolean=false
 
     companion object{
         fun newInstance(type:Int):NewsFragment{
@@ -53,14 +64,41 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
         Log.d("tag","lazyload")
         initDatas()
         initViews()
-        onRefresh()
+        mPresenter?.fetchNews(newsType!!,page!!,num)
         isPrepared=false
     }
 
-
+    var totalItemCount:Int=0
+    var lastVisibleItem:Int=0
+    var visibleItemCount:Int=0
+    var firstVisibleItem:Int=0
     fun initViews(){
         news_rcv.layoutManager=LinearLayoutManager(activity)
         news_rcv.adapter=adapter
+        news_rcv.itemAnimator.addDuration=0
+        var mScrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                    if (!isRefresh && totalItemCount <= lastVisibleItem + 1 && totalItemCount > visibleItemCount && visibleItemCount > 0) {
+                        this@NewsFragment.page++
+                        mPresenter?.fetchNews(newsType!!,page!!,num)
+                    }
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
+                    totalItemCount = layoutManager.getItemCount()
+                    firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
+                    lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                    visibleItemCount = layoutManager.getChildCount()
+            }
+
+        }
+        news_rcv.addOnScrollListener(mScrollListener)
+        adapter?.addFooters(LayoutInflater.from(activity).inflate(R.layout.item_footer,news_rcv,false))
         swl.setOnRefreshListener(this)
     }
 
