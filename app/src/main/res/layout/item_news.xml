@@ -7,7 +7,7 @@
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
                 android:background="@android:color/white"
-                android:id="@+id/title_layout">
+                android:id="@+id/news_layout">
 
 <ImageView
     android:id="@+id/news_head_img"

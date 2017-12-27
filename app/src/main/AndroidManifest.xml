@@ -19,6 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".module.web.WebActivity">
+        </activity>
     </application>
 
 </manifest>

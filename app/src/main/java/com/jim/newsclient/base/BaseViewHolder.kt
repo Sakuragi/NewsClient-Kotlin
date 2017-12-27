@@ -66,5 +66,9 @@ class BaseViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
         Glide.with(context).load(sourceId).apply(options).into(v)
     }
 
+    fun setOnClickListener(viewId:Int,listener:View.OnClickListener){
+        var v = getView<View>(viewId)
+        v?.setOnClickListener(listener)
+    }
 
 }

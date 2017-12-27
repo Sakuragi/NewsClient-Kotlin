@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.jim.newsclient.R
 import com.jim.newsclient.base.BaseViewHolder
 import com.jim.newsclient.module.news.model.NewsBean
+import com.jim.newsclient.module.web.WebActivity
 
 /**
  * Created by Jim on 2017/12/5.
@@ -64,6 +65,11 @@ class NewsAdapter(var datas: ArrayList<NewsBean>, var context: Context) : Recycl
         holder.setText(R.id.news_title, datas[position].title)
         holder.setText(R.id.news_time, datas[position].ctime)
         holder?.setImageWithUrl(R.id.news_head_img, datas[position].picUrl)
+        holder?.setOnClickListener(R.id.news_layout,object :View.OnClickListener{
+            override fun onClick(v: View?) {
+                WebActivity.start(context,datas[position].url)
+            }
+        })
     }
 
     override fun getItemCount(): Int {
