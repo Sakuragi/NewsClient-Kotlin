@@ -110,12 +110,12 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     }
 
     override fun onNewsFetched(resp: BaseBean<List<NewsBean>>) {
-        swl.isRefreshing=false
-        Log.d("tag","get resp: "+resp.toString())
+        swl?.isRefreshing=false
+        Log.d("TAG","get resp: "+resp.toString())
         if (resp.code==200){
-            Log.d("tag","news fetched")
+            Log.d("TAG","news fetched")
             if (page==0){
-                Log.d("tag","clear data")
+                Log.d("TAG","clear data")
                 adapter?.clearData()
             }
             adapter?.addDatas(resp.newslist)
@@ -123,13 +123,13 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     }
 
     override fun onNewsFetchedFailed(throwble: Throwable) {
-        swl.isRefreshing=false
-        Log.d("tag","get resp error: "+throwble.toString())
+        swl?.isRefreshing=false
+        Log.d("TAG","get resp error: "+throwble.toString())
 
     }
 
     override fun onRefresh() {
-        swl.isRefreshing=true
+        swl?.isRefreshing=true
         page=0;
         mPresenter?.fetchNews(newsType!!,page!!,num)
     }

@@ -28,9 +28,11 @@ class NewsAdapter(var datas: ArrayList<NewsBean>, var context: Context) : Recycl
     }
 
     fun addDatas(datas: List<NewsBean>) {
-        this.datas.addAll(datas)
-        notifyItemRangeChanged(this.datas.size - datas.size, datas.size)
-        Log.d("NewsAdapter", "size: " + this.datas.size)
+        if (datas != null) {
+            this.datas.addAll(datas)
+            notifyItemRangeChanged(this.datas.size - datas.size, datas.size)
+        }
+        Log.d("NewsAdapter", "size: " + this.datas?.size)
     }
 
     fun addHeaders(view: View) {
@@ -43,31 +45,32 @@ class NewsAdapter(var datas: ArrayList<NewsBean>, var context: Context) : Recycl
 
     fun clearData() {
         datas?.clear()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
-        if (headers.get(viewType)!=null){
-            return BaseViewHolder(headers.get(viewType),context)
-        }else if (footers.get(viewType)!=null){
-            return BaseViewHolder(footers.get(viewType),context)
+        if (headers?.get(viewType) != null) {
+            return BaseViewHolder(headers.get(viewType), context)
+        } else if (footers?.get(viewType) != null) {
+            return BaseViewHolder(footers.get(viewType), context)
         }
         var v = LayoutInflater.from(context).inflate(R.layout.item_news, parent, false)
         return BaseViewHolder(v, context)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        if (isHeaderView(position)){
+        if (isHeaderView(position)) {
             return
-        }else if (isFooterView(position)){
+        } else if (isFooterView(position)) {
             return
         }
 //        Log.d("NewsAdapter", "datas: " + datas[position].title + " " + datas[position].ctime + " " + datas[position].picUrl)
         holder.setText(R.id.news_title, datas[position].title)
         holder.setText(R.id.news_time, datas[position].ctime)
         holder?.setImageWithUrl(R.id.news_head_img, datas[position].picUrl)
-        holder?.setOnClickListener(R.id.news_layout,object :View.OnClickListener{
+        holder?.setOnClickListener(R.id.news_layout, object : View.OnClickListener {
             override fun onClick(v: View?) {
-                WebActivity.start(context,datas[position].url)
+                WebActivity.start(context, datas[position].url)
             }
         })
     }
