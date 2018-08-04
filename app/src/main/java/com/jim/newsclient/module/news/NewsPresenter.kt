@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Jim on 2017/12/3.
  */
-class NewsPresenter(val view:INewsView):BasePresenter(){
+class NewsPresenter(val view:INewsView?):BasePresenter(){
     fun fetchNews(newType:Int,page:Int,num:Int){
         val cmd= NewsCommand(page,num)
         fetchNewsReal(Constant.URLS[newType],cmd)
@@ -30,14 +30,14 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchNews(path,cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
     }
 
     fun fetchWorldNews(cmd: BaseCommand) {
         RetrofitUtils.fetchWorldNews(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp -> view.onNewsFetched(resp) }, { t -> view.onNewsFetchedFailed(t) })
+                .subscribe({ resp -> view?.onNewsFetched(resp) }, { t -> view?.onNewsFetchedFailed(t) })
     }
 
 
@@ -45,7 +45,7 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchTravel(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
 
     }
 
@@ -53,7 +53,7 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchTiYu(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
 
     }
 
@@ -61,14 +61,14 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchQiwen(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
     }
 
     fun fetchKeji(cmd: BaseCommand){
         RetrofitUtils.fetchKeji(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
 
     }
 
@@ -76,7 +76,7 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchHuaBian(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
 
     }
 
@@ -84,7 +84,7 @@ class NewsPresenter(val view:INewsView):BasePresenter(){
         RetrofitUtils.fetchHealth(cmd)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ resp->view.onNewsFetched(resp) },{t ->view.onNewsFetchedFailed(t)})
+                .subscribe({ resp->view?.onNewsFetched(resp) },{t ->view?.onNewsFetchedFailed(t)})
 
     }
 }

@@ -69,7 +69,9 @@ object RetrofitUtils {
         for (filed in fields) {
             val isAccess = filed.isAccessible
             filed.isAccessible = true
-            list.add(MapFiled(filed.name, filed.get(command).toString()))
+            if (filed.get(command)!=null) {
+                list.add(MapFiled(filed.name, filed.get(command).toString()))
+            }
             filed.isAccessible = isAccess
         }
         return list
