@@ -5,6 +5,7 @@
 - 2.kotlin类扩展
 - 3.MVP设计模式
 - 4.Retrofit+RxJava
+- 5.Fragment懒加载架构
 # 应用截图
 ![image](http://m.qpic.cn/psb?/V1486Uno1i1m7T/9BAynC.5uNWyIQ6VRNLd7x4IAnsmvmCpRUFSpnX9J4M!/b/dF4BAAAAAAAA&bo=QAIABEACAAQDKQw!&rf=viewer_4)
 ![image](http://m.qpic.cn/psb?/V1486Uno1i1m7T/OWEKDvvaE402dPltNOjJdev.OVJ6X*S.lKTEbzx8Exs!/b/dPIAAAAAAAAA&bo=QAIABEACAAQDCSw!&rf=viewer_4)
