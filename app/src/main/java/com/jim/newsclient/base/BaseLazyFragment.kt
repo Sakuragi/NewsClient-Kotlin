@@ -13,7 +13,7 @@ open class BaseLazyFragment:Fragment(){
 
     protected var isVisbileToUser:Boolean=false
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view=inflater?.inflate(getContentId(),container,false)
         return view
     }

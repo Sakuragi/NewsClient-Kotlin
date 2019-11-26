@@ -48,7 +48,7 @@ class NewsAdapter(var datas: ArrayList<NewsBean>, var context: Context) : Recycl
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         if (headers?.get(viewType) != null) {
             return BaseViewHolder(headers.get(viewType), context)
         } else if (footers?.get(viewType) != null) {
@@ -57,6 +57,7 @@ class NewsAdapter(var datas: ArrayList<NewsBean>, var context: Context) : Recycl
         var v = LayoutInflater.from(context).inflate(R.layout.item_news, parent, false)
         return BaseViewHolder(v, context)
     }
+
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         if (isHeaderView(position)) {

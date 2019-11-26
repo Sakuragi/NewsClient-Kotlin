@@ -50,7 +50,7 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
         return R.layout.fragment_news
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isPrepared=true
         lazyLoad()
@@ -75,21 +75,21 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
     fun initViews(){
         news_rcv.layoutManager=LinearLayoutManager(activity)
         news_rcv.adapter=adapter
-        news_rcv.itemAnimator.addDuration=0
-        var mScrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+        news_rcv.itemAnimator!!.addDuration=0
+        val mScrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (RecyclerView.SCROLL_STATE_IDLE == newState) {
                     if (!isRefresh && totalItemCount <= lastVisibleItem + 1 && totalItemCount > visibleItemCount && visibleItemCount > 0) {
                         this@NewsFragment.page++
-                        mPresenter?.fetchNews(newsType!!,page!!,num)
+                        mPresenter?.fetchNews(newsType,page,num)
                     }
                 }
             }
 
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                    val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                     totalItemCount = layoutManager.getItemCount()
                     firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
                     lastVisibleItem = layoutManager.findLastVisibleItemPosition()
@@ -98,14 +98,14 @@ class NewsFragment:BaseLazyFragment(),INewsView,SwipeRefreshLayout.OnRefreshList
 
         }
         news_rcv.addOnScrollListener(mScrollListener)
-        adapter?.addFooters(LayoutInflater.from(activity).inflate(R.layout.item_footer,news_rcv,false))
+//        adapter?.addFooters(LayoutInflater.from(activity).inflate(R.layout.item_footer,null))
         swl.setOnRefreshListener(this)
     }
 
     fun initDatas(){
-        newsType=arguments.getInt("type")
+        newsType=arguments!!.getInt("type")
         mPresenter= NewsPresenter(this)
-        adapter= NewsAdapter(datas,activity)
+        adapter= NewsAdapter(datas,activity!!)
         page=0
     }
 
